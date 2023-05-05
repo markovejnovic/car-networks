@@ -24,10 +24,10 @@ jobs:
 
       - name: Fetch Marp
         if: steps.cached-marp.outputs.cache-hit != 'true'
-        run: >
-          wget https://github.com/marp-team/marp-cli/releases/download/v2.5.0/marp-cli-v2.5.0-linux.tar.gz &&
-          tar -vxzf marp-cli-v2.5.0-linux.tar.gz &&
-          sudo mv marp /usr/local/bin &&
+        run: |
+          wget https://github.com/marp-team/marp-cli/releases/download/v2.5.0/marp-cli-v2.5.0-linux.tar.gz
+          tar -vxzf marp-cli-v2.5.0-linux.tar.gz
+          sudo mv marp /usr/local/bin
           rm marp-cli-v2.5.0-linux.tar.gz
 
       - name: Build
