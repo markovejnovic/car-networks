@@ -17,7 +17,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: /usr/local/bin/marp
-          key: ${{ runner.os }}-primes
+          key: ${{ runner.os }}-marp
 
       - name: Fetch Marp
         if: steps.cached-marp.outputs.cache-hit != 'true'
