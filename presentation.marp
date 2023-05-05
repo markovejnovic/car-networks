@@ -1,0 +1,242 @@
+---
+theme: gaia
+_class: lead
+paginate: true
+---
+
+<style>
+img[alt~="center"] {
+    display: block;
+    margin: 0 auto;
+}
+
+img {
+  border-radius: 16px;
+}
+</style>
+
+# **Car Networks**
+
+Marko Vejnovic
+*Ex? Semi BMS Engineer*
+2023-05-06
+
+:technologist: [github.com/markovejnovic](https://github.com/markovejnovic)
+
+---
+
+# Topics
+
+- Design Goals
+- LIN
+- CAN
+- ETH
+
+---
+
+# Design Problem
+
+Car Networks need to do a couple things:
+
+- Simple
+- Cheap
+- Bulletproof
+
+---
+
+# Simplicity
+
+![w:640 center](https://cdn.thinglink.me/api/image/714051182259077120/1024/10/scaletowidth?e=)
+
+---
+
+# Chips Suck
+
+![w:820 center](tms570spec.png)
+
+---
+
+# Cost
+
+![w:480 center](https://sumitomoelectric.com/sites/default/files/styles/crop_sei_cp_520x520/public/2020-12/products/big_img_sqr_fxh/Wiring_Harness.jpg?h=84bbee1f&itok=FfQFhV9Y)
+
+---
+
+# Reliability
+
+![w:640 center](https://www.theglobeandmail.com/resizer/tNoTu9KYiW-_-T6SuOlAU0Ysx1k=/1200x803/filters:quality(80)/cloudfront-us-east-1.images.arcpublishing.com/tgam/TBSVQNDDB5GDLOXAYSPB7CCVNQ)
+
+---
+
+# Topology
+
+![w:640 center](https://canlogger1000.csselectronics.com/img/LIN-bus-vs-CAN-bus-Local-Interconnect-Network.svg)
+
+---
+
+# LIN
+
+![w:640 center](https://www.microcontrollertips.com/wp-content/uploads/2022/06/Buses-in-automobiles-LIN-Figure-2.png)
+
+---
+
+# CAN
+
+![w:640 center](https://www.typhoon-hil.com/documentation/typhoon-hil-software-manual/Images/can_bus_protocol_13.png)
+
+---
+
+# LIN vs CAN
+
+- Both Cheap
+- Both Bus-Topology
+- CAN: Error Checking
+- CAN: Much Faster (esp. with CAN-FD)
+- LIN: Poll-based | CAN: Priority-based Arbitration
+
+*Forget LIN, only the agricultural industry uses it.*
+
+---
+
+# Mid-Summary...
+
+- Most signals are synchronous
+- Some signals are asynchronous
+- ECUs (nodes) talk on buses
+- Multiple buses connected through ECUs
+
+---
+
+# CAN Buses
+
+![w:480 center](https://www.securecav.com/wp-content/uploads/2020/07/Ethernet-multi-gigabyte-technologies_continentalPR-scaled.jpg)
+
+*Bus-topology became star topology.*
+
+---
+
+![w:520 center](https://ee.cdnartwhere.eu/wp-content/uploads/import/default/files/sites/default/files/images/vector_0.jpg)
+
+*😠 Curse you, Vector Informatik GmbH.*
+
+---
+
+# Weird Dongles
+
+![w:420 center](https://m.media-amazon.com/images/I/61sdiTLxpSL._AC_UF894,1000_QL80_.jpg)
+
+---
+
+# Issues we're trying to solve
+
+- Limiting Bandwidth
+- Lackluster Tooling
+
+# Features we need to preserve
+
+- Cost
+- Reliability
+
+---
+
+# Something Better?
+
+**100Base-T1 Ethernet**
+
+![w:420 center](https://assets.lcry.net/images/12150_01.png)
+
+*Long story short: Cheap Ethernet*
+
+---
+
+# 100Base-T1 vs. 100Base-TX
+
+- 1 x Twisted Pair vs 2 x Twisted Pair
+- 100Mbps vs. 125Mbps Throughput
+- Much Higher EMI Resistance (no shielding yay!)
+- 15m vs. 100m Range
+- PAM3 vs MLT3 encoding
+
+---
+
+# So Does ETH replace CAN?
+
+- Equally as cheap
+- Much higher bandwidth
+- Tooling familiarity!
+
+**But, not quite.**
+
+- Point-to-point PHY
+- No arbitration
+- No CRC
+
+---
+
+# Hack 1: Use IP!
+
+- Point-to-point communication yields star topologies.
+- Switches connect devices across hub boundaries.
+- IP lets us prioritize packets.
+
+![w:256 center](https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Star_Topology.png/220px-Star_Topology.png)
+
+---
+
+# Hack 2: Use UDP!
+
+- Checksum!
+- Application-Specific Ports!
+
+## Issues (for you)?
+
+* Packets arrive out of order...
+* When do we care?
+* What to do?
+
+---
+
+# Any transport layer works!
+
+- TCP
+
+*Or, some new ones I've learned about:*
+
+- RUDP
+- DCCP
+- Multipath TCP? (we can dream)
+
+---
+
+### Big Problems
+
+- Expensive to rework existing code to work on ETH (unless... 🤔🤔)
+- Fresh = Buggy
+- Pioneering = Expensive Engineering
+
+### Big Solutions
+
+- Bigger Throughput
+- Much more flexibility
+- Better Tooling = Happier Engineers -- Better Product
+
+---
+
+# Recap
+
+- Lots of synchronous signals
+- Loaded buses
+- Minimizing cost, maximizing reliability
+
+#### Existing protocols
+
+- CAN: Dirt-cheap, bus-oriented, extremely simple, huge legacy.
+- ETH: New contender, very fast, very flexible.
+
+---
+
+# 🤔 Questions?
+
+---
+
+# 🙇 Thanks!
