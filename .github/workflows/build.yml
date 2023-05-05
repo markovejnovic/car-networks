@@ -12,6 +12,9 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v3
 
+      - name: Fetch Build Dependencies
+        run: sudo apt-get install -y make tar
+
       - name: Cached Marp
         id: cached-marp
         uses: actions/cache@v3
@@ -26,9 +29,6 @@ jobs:
           tar -vxzf marp-cli-v2.5.0-linux.tar.gz && \
           sudo mv marp /usr/local/bin && \
           rm marp-cli-v2.5.0-linux.tar.gz
-
-      - name: Fetch Build Dependencies
-        run: sudo apt-get install -y make
 
       - name: Build
         run: make build
